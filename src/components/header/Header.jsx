@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
-import './header.css'
+import QRCode from 'qrcode.react';
+import './header.css';
 
 function Header() {
   const [name, setName] = useState('');
@@ -21,16 +22,14 @@ function Header() {
         console.log('QR code verification result:', data);
       } else {
         console.error('QR code verification failed');
-   
       }
     } catch (error) {
       console.error('Error verifying QR code:', error);
-      
     }
   };
 
   return (
-    <div className='container'>
+    <div className="container">
       <h1>Vérification du code QR des invités</h1>
       <form onSubmit={handleFormSubmit}>
         <label>
@@ -62,6 +61,9 @@ function Header() {
         <br />
         <button type="submit">Vérifier le code QR</button>
       </form>
+      <div className="qrcode-container">
+        {qrCodeData && <QRCode value={qrCodeData} />}
+      </div>
     </div>
   );
 }
